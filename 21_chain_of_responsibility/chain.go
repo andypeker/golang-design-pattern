@@ -17,6 +17,7 @@ func (r *RequestChain) SetSuccessor(m *RequestChain) {
 }
 
 func (r *RequestChain) HandleFeeRequest(name string, money int) bool {
+	fmt.Println("----- RequestChain HandleFeeRequest", name, money)
 	if r.Manager.HaveRight(money) {
 		return r.Manager.HandleFeeRequest(name, money)
 	}
@@ -43,6 +44,7 @@ func (*ProjectManager) HaveRight(money int) bool {
 }
 
 func (*ProjectManager) HandleFeeRequest(name string, money int) bool {
+	fmt.Println("......... ProjectManager HandleFeeRequest")
 	if name == "bob" {
 		fmt.Printf("Project manager permit %s %d fee request\n", name, money)
 		return true
@@ -64,7 +66,8 @@ func (*DepManager) HaveRight(money int) bool {
 }
 
 func (*DepManager) HandleFeeRequest(name string, money int) bool {
-	if name == "tom" {
+	fmt.Println("......... DepManager HandleFeeRequest")
+	if name == "tom" || name == "bob" {
 		fmt.Printf("Dep manager permit %s %d fee request\n", name, money)
 		return true
 	}
@@ -85,7 +88,8 @@ func (*GeneralManager) HaveRight(money int) bool {
 }
 
 func (*GeneralManager) HandleFeeRequest(name string, money int) bool {
-	if name == "ada" {
+	fmt.Println("......... GeneralManager HandleFeeRequest")
+	if name == "ada" || name == "tom" || name == "bob" {
 		fmt.Printf("General manager permit %s %d fee request\n", name, money)
 		return true
 	}

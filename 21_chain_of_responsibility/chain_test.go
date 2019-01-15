@@ -1,6 +1,9 @@
 package chain
 
+import "fmt"
+
 func ExampleChain() {
+	fmt.Println(".")
 	c1 := NewProjectManagerChain()
 	c2 := NewDepManagerChain()
 	c3 := NewGeneralManagerChain()
@@ -11,6 +14,8 @@ func ExampleChain() {
 	var c Manager = c1
 
 	c.HandleFeeRequest("bob", 400)
+	c.HandleFeeRequest("bob", 600)
+	c.HandleFeeRequest("bob", 6000)
 	c.HandleFeeRequest("tom", 1400)
 	c.HandleFeeRequest("ada", 10000)
 	c.HandleFeeRequest("floar", 400)

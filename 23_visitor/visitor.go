@@ -10,10 +10,6 @@ type Visitor interface {
 	Visit(Customer)
 }
 
-type EnterpriseCustomer struct {
-	name string
-}
-
 type CustomerCol struct {
 	customers []Customer
 }
@@ -26,6 +22,10 @@ func (c *CustomerCol) Accept(visitor Visitor) {
 	for _, customer := range c.customers {
 		customer.Accept(visitor)
 	}
+}
+
+type EnterpriseCustomer struct {
+	name string
 }
 
 func NewEnterpriseCustomer(name string) *EnterpriseCustomer {
